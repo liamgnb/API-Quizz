@@ -19,6 +19,10 @@ class Reponse
     #[ORM\Column]
     private ?bool $est_correcte = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reponses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Question $question = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class Reponse
     public function setEstCorrecte(bool $est_correcte): self
     {
         $this->est_correcte = $est_correcte;
+
+        return $this;
+    }
+
+    public function getQuestion(): ?Question
+    {
+        return $this->question;
+    }
+
+    public function setQuestion(?Question $question): self
+    {
+        $this->question = $question;
 
         return $this;
     }

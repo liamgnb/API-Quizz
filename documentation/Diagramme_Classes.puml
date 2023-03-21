@@ -1,0 +1,24 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+
+class Theme {
+    - id : int
+    - liblle : string
+}
+
+class Question {
+    - id : int
+    - libelle : string
+}
+
+class Reponse {
+    - id : int
+    - libelle : string
+    - est_correcte : bool
+}
+
+Reponse "1..*" <-- "1..1" Question
+Theme "1..1" -- "0..*" Question
+
+@enduml

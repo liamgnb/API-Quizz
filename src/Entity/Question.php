@@ -15,11 +15,9 @@ class Question
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['getThemeByIdWithQuestions'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['getThemeByIdWithQuestions'])]
     private ?string $libelle = null;
 
     #[ORM\ManyToOne(inversedBy: 'questions')]
@@ -31,7 +29,6 @@ class Question
 
     public function __construct()
     {
-        $this->Reponse = new ArrayCollection();
         $this->reponses = new ArrayCollection();
     }
 
@@ -50,14 +47,6 @@ class Question
         $this->libelle = $libelle;
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, Reponse>
-     */
-    public function getReponse(): Collection
-    {
-        return $this->Reponse;
     }
 
     public function getTheme(): ?Theme

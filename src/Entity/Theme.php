@@ -14,15 +14,12 @@ class Theme
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['getThemeByIdWithQuestions'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['getThemeByIdWithQuestions'])]
     private ?string $libelle = null;
 
     #[ORM\OneToMany(mappedBy: 'Theme', targetEntity: Question::class)]
-    #[Groups(['getThemeByIdWithQuestions'])]
     private Collection $questions;
 
     public function __construct()

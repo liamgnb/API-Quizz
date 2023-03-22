@@ -39,6 +39,17 @@ class ThemeRepository extends ServiceEntityRepository
         }
     }
 
+    public function deleteAll(): void
+    {
+        $themes = $this->findAll();
+
+        foreach ($themes as $theme)
+        {
+            $this->remove($theme, true);
+        }
+
+    }
+
 //    /**
 //     * @return Theme[] Returns an array of Theme objects
 //     */

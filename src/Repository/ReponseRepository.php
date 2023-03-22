@@ -39,6 +39,18 @@ class ReponseRepository extends ServiceEntityRepository
         }
     }
 
+    public function deleteAll(): void
+    {
+       $reponses = $this->findAll();
+
+       foreach ($reponses as $reponse)
+       {
+           $this->remove($reponse, true);
+       }
+
+    }
+
+
 //    /**
 //     * @return Reponse[] Returns an array of Reponse objects
 //     */

@@ -39,6 +39,17 @@ class QuestionRepository extends ServiceEntityRepository
         }
     }
 
+    public function deleteAll(): void
+    {
+        $questions = $this->findAll();
+
+        foreach ($questions as $question)
+        {
+            $this->remove($question, true);
+        }
+
+    }
+
 //    /**
 //     * @return Question[] Returns an array of Question objects
 //     */

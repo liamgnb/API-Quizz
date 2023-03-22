@@ -11,14 +11,15 @@ class ThemeFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create("fr_FR");
+        $themes = [
+            1 => "Nature",
+        ];
 
-        for ($i=1; $i<=10; $i++) {
+        foreach ($themes as $th)
+        {
             $theme = new Theme();
-            $theme->setLibelle($faker->words(2, true));
+            $theme->setLibelle($th);
 
-            // Créer une référence
-            $this->addReference("theme_".$i,$theme);
             $manager->persist($theme);
         }
 

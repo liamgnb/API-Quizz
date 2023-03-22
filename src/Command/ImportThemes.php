@@ -12,6 +12,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use League\Csv\Reader;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 // the name of the command is what users type after "php bin/console"
 #[AsCommand(name: 'app:import-themes')]
@@ -21,17 +22,20 @@ class ImportThemes extends Command
     private ThemeRepository $themeRepository;
     private QuestionRepository $questionRepository;
     private ReponseRepository $reponseRepository;
+    private SluggerInterface $slugger;
 
     /**
      * @param ThemeRepository $themeRepository
      * @param QuestionRepository $questionRepository
      * @param ReponseRepository $reponseRepository
+     * @param SluggerInterface $slugger
      */
-    public function __construct(ThemeRepository $themeRepository, QuestionRepository $questionRepository, ReponseRepository $reponseRepository)
+    public function __construct(ThemeRepository $themeRepository, QuestionRepository $questionRepository, ReponseRepository $reponseRepository, SluggerInterface $slugger)
     {
         $this->themeRepository = $themeRepository;
         $this->questionRepository = $questionRepository;
         $this->reponseRepository = $reponseRepository;
+        $this->slugger = $slugger;
         parent::__construct();
     }
 
@@ -56,6 +60,7 @@ class ImportThemes extends Command
             // Theme
             $theme = new Theme();
             $theme->setLibelle($record['Libelle']);
+            $theme->setSlug($this->slugger->slug($theme->getLibelle())->lower());
             $this->themeRepository->save($theme, true);
 
             $progressBar->advance();

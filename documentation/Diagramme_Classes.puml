@@ -5,6 +5,7 @@ skinparam classAttributeIconSize 0
 class Theme {
     - id : int
     - liblle : string
+    - slug : string
 }
 
 class Question {

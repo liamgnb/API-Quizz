@@ -46,10 +46,10 @@ class ThemeController extends AbstractController
         return new Response($themesJson, Response::HTTP_OK, ['content-type' => 'application/json']);
     }
 
-    #[Route('/api/themes/{id}', name: 'api_getThemeById', methods: ['GET'])]
-    public function getById($id): Response
+    #[Route('/api/themes/{slug}', name: 'api_getThemeBySlug', methods: ['GET'])]
+    public function getBySlug($slug): Response
     {
-        $theme = $this->themeRepository->findOneBy(['id' => $id]);
+        $theme = $this->themeRepository->findOneBy(['slug' => $slug]);
 
         if (!$theme) {
             return $this->generateError("Le thème demandée n'existe pas.", Response::HTTP_NOT_FOUND);
@@ -65,10 +65,10 @@ class ThemeController extends AbstractController
         return new Response($themesJson, Response::HTTP_OK, ['content-type' => 'application/json']);
     }
 
-    #[Route('/api/themes/{id}/questions', name: 'api_getThemeByIdWithQuestions', methods: ['GET'])]
-    public function getByIdWithPosts($id): Response
+    #[Route('/api/themes/{slug}/questions', name: 'api_getThemeBySlugWithQuestions', methods: ['GET'])]
+    public function getBySlugWithQuestions($slug): Response
     {
-        $theme = $this->themeRepository->findOneBy(['id' => $id]);
+        $theme = $this->themeRepository->findOneBy(['slug' => $slug]);
 
         if (!$theme) {
             return $this->generateError("Le thème demandée n'existe pas.", Response::HTTP_NOT_FOUND);
@@ -82,6 +82,47 @@ class ThemeController extends AbstractController
 
             $reponses = [];
             foreach ($question->getReponses() as $reponse)
+            {
+                $reponses[] = ['id' => $reponse->getId(), 'libelle' => $reponse->getLibelle(), 'estCorrecte' => $reponse->isEstCorrecte()];
+            }
+
+            $themeDetailsQuestionsDTO->setReponses($reponses);
+            $themes[] = $themeDetailsQuestionsDTO;
+
+        }
+        $themesJson = $this->serializer->serialize($themes, 'json');
+
+        return new Response($themesJson, Response::HTTP_OK, ['content-type' => 'application/json']);
+    }
+
+    #[Route('/api/themes/{slug}/questions/{nb}/aleatoire', name: 'api_getThemeBySlugWithQuestionsRandom', methods: ['GET'])]
+    public function getBySlugWithQuestionsRandom($slug, $nb): Response
+    {
+        $theme = $this->themeRepository->findOneBy(['slug' => $slug]);
+
+        if (!$theme) {
+            return $this->generateError("Le thème demandée n'existe pas.", Response::HTTP_NOT_FOUND);
+        }
+
+        $questions = $theme->getQuestions();
+        $historiqueQuestions = [];
+
+        for ($i=1; $i<=$nb; $i++)
+        {
+            $position = random_int(1, count($questions));
+            while (in_array($position, $historiqueQuestions)) {
+                $position = random_int(1, count($questions));
+            }
+            $historiqueQuestions[] = $position;
+
+            // TODO VERIF DU NB !!!!
+
+            $themeDetailsQuestionsDTO = new ThemeDetailsQuestionsDTO();
+            $themeDetailsQuestionsDTO->setId($questions[$position]->getId());
+            $themeDetailsQuestionsDTO->setLibelle($questions[$position]->getLibelle());
+
+            $reponses = [];
+            foreach ($questions[$position]->getReponses() as $reponse)
             {
                 $reponses[] = ['id' => $reponse->getId(), 'libelle' => $reponse->getLibelle(), 'estCorrecte' => $reponse->isEstCorrecte()];
             }

@@ -105,6 +105,10 @@ class ThemeController extends AbstractController
         }
 
         $questions = $theme->getQuestions();
+        if (count($questions) < $nb) {
+            return $this->generateError("Le nombre de questions demandé dépasse le nombre de questions disponible.", Response::HTTP_NOT_FOUND);
+        }
+
         $historiqueQuestions = [];
 
         for ($i=1; $i<=$nb; $i++)
@@ -114,8 +118,6 @@ class ThemeController extends AbstractController
                 $position = random_int(1, count($questions));
             }
             $historiqueQuestions[] = $position;
-
-            // TODO VERIF DU NB !!!!
 
             $themeDetailsQuestionsDTO = new ThemeDetailsQuestionsDTO();
             $themeDetailsQuestionsDTO->setId($questions[$position]->getId());

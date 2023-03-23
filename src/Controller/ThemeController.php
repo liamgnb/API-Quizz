@@ -6,7 +6,6 @@ namespace App\Controller;
 use App\Dto\ThemeCountQuestionsDTO;
 use App\Dto\ThemeDetailsQuestionsDTO;
 use App\Repository\ThemeRepository;
-use Proxies\__CG__\App\Entity\Question;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +27,7 @@ class ThemeController extends AbstractController
         $this->serializer = $serializer;
     }
 
-    #[Route('/api/quizz', name: 'api_getThemes', methods: ['GET'], priority: 1)]
+    #[Route('/api/quizz', name: 'api_getThemes', methods: ['GET'])]
     public function getAll(Request $request): Response
     {
         $slug = $request->get('theme');
@@ -116,7 +115,7 @@ class ThemeController extends AbstractController
         $slug = $request->get('theme');
         $nb = $request->get('nb');
 
-        if ($slug == null OR $nb == null) {
+        if ($slug == null OR $nb == null OR $nb <= 0 OR !is_numeric($nb) ) {
             return $this->generateError("Erreur d'URL.", Response::HTTP_NOT_FOUND);
         }
 

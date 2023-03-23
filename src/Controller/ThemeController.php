@@ -8,6 +8,7 @@ use App\Dto\ThemeDetailsQuestionsDTO;
 use App\Repository\ThemeRepository;
 use Proxies\__CG__\App\Entity\Question;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -27,9 +28,14 @@ class ThemeController extends AbstractController
         $this->serializer = $serializer;
     }
 
-    #[Route('/api/themes', name: 'app_getThemes', methods: ['GET'])]
-    public function getAll(): Response
+    #[Route('/api/quizz', name: 'api_getThemes', methods: ['GET'], priority: 1)]
+    public function getAll(Request $request): Response
     {
+        $slug = $request->get('theme');
+        if ($slug != null) {
+            return $this->getBySlug($slug);
+        }
+
         $themes = [];
 
         foreach ($this->themeRepository->findAll() as $theme)
@@ -46,9 +52,10 @@ class ThemeController extends AbstractController
         return new Response($themesJson, Response::HTTP_OK, ['content-type' => 'application/json']);
     }
 
-    #[Route('/api/themes/{slug}', name: 'api_getThemeBySlug', methods: ['GET'])]
+    //#[Route('/api/quizz', name: 'api_getThemesBySlug', methods: ['GET'])]
     public function getBySlug($slug): Response
     {
+
         $theme = $this->themeRepository->findOneBy(['slug' => $slug]);
 
         if (!$theme) {
@@ -65,9 +72,16 @@ class ThemeController extends AbstractController
         return new Response($themesJson, Response::HTTP_OK, ['content-type' => 'application/json']);
     }
 
-    #[Route('/api/themes/{slug}/questions', name: 'api_getThemeBySlugWithQuestions', methods: ['GET'])]
-    public function getBySlugWithQuestions($slug): Response
+//  #[Route('/api/themes/{slug}/questions', name: 'api_getThemeBySlugWithQuestions', methods: ['GET'])]
+    #[Route('/api/quizz/questions', name: 'api_getThemeBySlugWithQuestions', methods: ['GET'])]
+    public function getBySlugWithQuestions(Request $request): Response
     {
+        $slug = $request->get('theme');
+
+        if ($slug == null) {
+            return $this->generateError("Erreur d'URL.", Response::HTTP_NOT_FOUND);
+        }
+
         $theme = $this->themeRepository->findOneBy(['slug' => $slug]);
 
         if (!$theme) {
@@ -95,9 +109,17 @@ class ThemeController extends AbstractController
         return new Response($themesJson, Response::HTTP_OK, ['content-type' => 'application/json']);
     }
 
-    #[Route('/api/themes/{slug}/questions/{nb}/aleatoire', name: 'api_getThemeBySlugWithQuestionsRandom', methods: ['GET'])]
-    public function getBySlugWithQuestionsRandom($slug, $nb): Response
+//  #[Route('/api/themes/{slug}/questions/{nb}/aleatoire', name: 'api_getThemeBySlugWithQuestionsRandom', methods: ['GET'])]
+    #[Route('/api/quizz/aleatoire', name: 'api_getThemeBySlugWithQuestionsRandom', methods: ['GET'])]
+    public function getBySlugWithQuestionsRandom(Request $request): Response
     {
+        $slug = $request->get('theme');
+        $nb = $request->get('nb');
+
+        if ($slug == null OR $nb == null) {
+            return $this->generateError("Erreur d'URL.", Response::HTTP_NOT_FOUND);
+        }
+
         $theme = $this->themeRepository->findOneBy(['slug' => $slug]);
 
         if (!$theme) {

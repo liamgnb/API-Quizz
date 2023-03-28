@@ -6,6 +6,7 @@ class ThemeCountQuestionsDTO
 {
     private int $id;
     private string $libelle;
+    private string $slug;
     private int $nbQuestions;
 
     /**
@@ -54,6 +55,22 @@ class ThemeCountQuestionsDTO
     public function setNbQuestions(int $nbQuestions): void
     {
         $this->nbQuestions = $nbQuestions;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 
 }

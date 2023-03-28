@@ -42,6 +42,8 @@ class ImportThemes extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         // Vidé les tables
+        $output->writeln('');
+        $output->writeln('<info>Suppression des données...</info>');
         $this->reponseRepository->deleteAll();
         $this->questionRepository->deleteAll();
         $this->themeRepository->deleteAll();

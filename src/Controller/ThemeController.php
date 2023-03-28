@@ -42,6 +42,7 @@ class ThemeController extends AbstractController
             $themeCountQuestionDTO = new ThemeCountQuestionsDTO();
             $themeCountQuestionDTO->setId($theme->getId());
             $themeCountQuestionDTO->setLibelle($theme->getLibelle());
+            $themeCountQuestionDTO->setSlug($theme->getSlug());
             $themeCountQuestionDTO->setNbQuestions($theme->getQuestions()->count());
             $themes[] = $themeCountQuestionDTO;
         }
@@ -64,6 +65,7 @@ class ThemeController extends AbstractController
         $themeCountQuestionsDTO = new ThemeCountQuestionsDTO();
         $themeCountQuestionsDTO->setId($theme->getId());
         $themeCountQuestionsDTO->setLibelle($theme->getLibelle());
+        $themeCountQuestionsDTO->setSlug($theme->getSlug());
         $themeCountQuestionsDTO->setNbQuestions($theme->getQuestions()->count());
 
         $themesJson = $this->serializer->serialize($themeCountQuestionsDTO, 'json');

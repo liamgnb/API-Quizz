@@ -136,9 +136,9 @@ class ThemeController extends AbstractController
 
         for ($i=1; $i<=$nb; $i++)
         {
-            $position = random_int(1, count($questions));
+            $position = random_int(0, count($questions)-1);
             while (in_array($position, $historiqueQuestions)) {
-                $position = random_int(1, count($questions));
+                $position = random_int(0, count($questions)-1);
             }
             $historiqueQuestions[] = $position;
 

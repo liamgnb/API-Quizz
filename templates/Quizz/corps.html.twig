@@ -1,0 +1,107 @@
+<ul class="list-group">
+    <li class="list-group-item bg-secondary border-secondary fs-5" aria-current="true">EndPoints</li>
+    <li class="list-group-item">
+        <div class="d-flex justify-content-between flex-wrap">
+            <strong>Liste de thèmes</strong>
+            <span class="badge text-bg-info">/api/quizz/themes</span>
+        </div>
+        <div class="border border-warning mx-2 py-1 px-2 rounded rounded-2 my-2">
+            <small><em><dl class="mb-0">
+                        <dd class="my-0">{</dd>
+                        <dd class="ms-3 my-0">"id": 11,</dd>
+                        <dd class="ms-3 my-0">"libelle": "Méandres du web",</dd>
+                        <dd class="ms-3 my-0">"nbQuestions": 30,</dd>
+                        <dd class="ms-3 my-0">"slug": "meandres-du-web"</dd>
+                        <dd class="my-0">}</dd>
+                    </dl></em></small>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex justify-content-between flex-wrap">
+            <strong>Liste un thème</strong>
+            <span class="badge text-bg-info">/api/quizz/themes?theme={slug}</span>
+        </div>
+        <div class="border border-warning mx-2 py-1 px-2 rounded rounded-2 my-2">
+            <small><em><dl class="mb-0">
+                        <dd class="my-0">{</dd>
+                        <dd class="ms-3 my-0">"id": 11,</dd>
+                        <dd class="ms-3 my-0">"libelle": "Méandres du web",</dd>
+                        <dd class="ms-3 my-0">"nbQuestions": 30,</dd>
+                        <dd class="ms-3 my-0">"slug": "meandres-du-web"</dd>
+                        <dd class="my-0">}</dd>
+                    </dl></em></small>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex justify-content-between flex-wrap">
+            <strong>Liste des questions d'un thème</strong>
+            <span class="badge text-bg-info">/api/quizz/questions?theme={slug}</span>
+        </div>
+        <div class="border border-warning mx-2 py-1 px-2 rounded rounded-2 my-2">
+            <small><em><dl class="mb-0">
+                <dd class="my-0">{</dd>
+                <dd class="ms-3 my-0">"id": 301,</dd>
+                <dd class="ms-3 my-0">"libelle": "Comment appelle-t-on une personne qui utilise Internet pour visiter des sites web ?",</dd>
+                <dd class="ms-3 my-0">"reponses": [</dd>
+                <dd class="ms-3 my-0"><div class="ms-3">{</div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"id": 1201,</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"libelle": "Internaute",</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"estCorrecte": true</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3">},</div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3">{</div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"id": 1202,</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"libelle": "Webmaster",</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"estCorrecte": false</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3">},</div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3">{</div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"id": 1203,</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"libelle": "Navigateur",</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"estCorrecte": false</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3">},</div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3">{</div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"id": 1204,</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"libelle": "Butineur",</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"estCorrecte": false</div></div></dd>
+                <dd class="ms-3 my-0"><div class="ms-3">}</div></dd>
+                <dd class="ms-3 my-0">]</dd>
+                <dd class="my-0">}</dd>
+            </dl></em></small>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="d-flex justify-content-between flex-wrap">
+            <strong>Liste un nombre questions défini d'un thème</strong>
+            <span class="badge text-bg-info">/api/quizz/aleatoire?theme={slug}b&nb={x}</span>
+        </div>
+        <div class="border border-warning mx-2 py-1 px-2 rounded rounded-2 my-2">
+            <small><em><dl class="mb-0">
+                        <dd class="my-0">{</dd>
+                        <dd class="ms-3 my-0">"id": 301,</dd>
+                        <dd class="ms-3 my-0">"libelle": "Comment appelle-t-on une personne qui utilise Internet pour visiter des sites web ?",</dd>
+                        <dd class="ms-3 my-0">"reponses": [</dd>
+                        <dd class="ms-3 my-0"><div class="ms-3">{</div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"id": 1201,</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"libelle": "Internaute",</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"estCorrecte": true</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3">},</div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3">{</div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"id": 1202,</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"libelle": "Webmaster",</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"estCorrecte": false</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3">},</div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3">{</div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"id": 1203,</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"libelle": "Navigateur",</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"estCorrecte": false</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3">},</div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3">{</div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"id": 1204,</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"libelle": "Butineur",</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3"><div class="ms-3">"estCorrecte": false</div></div></dd>
+                        <dd class="ms-3 my-0"><div class="ms-3">}</div></dd>
+                        <dd class="ms-3 my-0">]</dd>
+                        <dd class="my-0">}</dd>
+                    </dl></em></small>
+        </div>
+    </li>
+</ul>

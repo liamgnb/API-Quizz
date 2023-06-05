@@ -1,50 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}API LG{% endblock %}
-
 {% block body %}
     <body>
-        <div class="container py-3 w-50">
-            <header>
-                <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-                    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-                        {# IMG #}
-                        <span class="fs-4">API LG</span>
-                    </a>
+    <div class="container py-3 mx-auto">
+        <header>
+            <div class="my-4 mx-auto text-center">
+                <img src="{{ asset('img/logo.ico') }}" alt="Logo" style="width: 5em">
+                <h1 class="display-4 fw-normal"><strong>API GL</strong></h1>
+            </div>
+        </header>
 
-                    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        {#<a class="me-3 py-2 text-dark text-decoration-none" href="#">Features</a>#}
-                    </nav>
-                </div>
+        <div class="border-top my-3"></div>
 
-                <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-                    <h1 class="display-4 fw-normal"><strong>API LG</strong></h1>
-                    <p class="fs-5 text-muted">Différentes API disponible.</p>
-                </div>
-            </header>
-
-            <main>
-                <div class="row row-cols-1 row-cols-md-3 mb-3 text-center justify-content-center">
-                    <div class="col">
-                        <div class="card mb-4 rounded-3 shadow-sm">
-                            <div class="card-header py-3">
-                                <h4 class="my-0 fw-normal">Quizz</h4>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-unstyled mt-3 mb-4">
-                                    <li>Différents thèmes</li>
-                                    <li>Une réponse correcte</li>
-                                </ul>
-                                <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
+        <main>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item w-75 mx-auto">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    API - Quizz
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show pt-4 px-2" data-bs-parent="#accordionExample">
+                                {% include './Quizz/tete.html.twig' %}
+                                {% include './Quizz/corps.html.twig' %}
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
+        </main>
 
-            <footer class="pt-4 my-md-5 pt-md-5 border-top">
-                <div>Copyrit : Liam GENEBRIER</div>
-            </footer>
-        </div>
+
+        <footer class="pt-1 my-4 border-top text-center">
+            <div>Copyrit : Liam GENEBRIER</div>
+        </footer>
+    </div>
     </body>
 {% endblock %}

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class ThemeController extends AbstractController
+class QuizzController extends AbstractController
 {
     private ThemeRepository $themeRepository;
     private SerializerInterface $serializer;
@@ -27,7 +27,7 @@ class ThemeController extends AbstractController
         $this->serializer = $serializer;
     }
 
-    #[Route('/api/quizz', name: 'api_getThemes', methods: ['GET'])]
+    #[Route('/api/quizz/themes', name: 'api_getThemes', methods: ['GET'])]
     public function getAll(Request $request): Response
     {
         $slug = $request->get('theme');
@@ -37,7 +37,7 @@ class ThemeController extends AbstractController
 
         $themes = [];
 
-        foreach ($this->themeRepository->findAll() as $theme)
+        foreach ($this->themeRepository->findBy([], ['libelle' => 'ASC']) as $theme)
         {
             $themeCountQuestionDTO = new ThemeCountQuestionsDTO();
             $themeCountQuestionDTO->setId($theme->getId());
@@ -52,7 +52,6 @@ class ThemeController extends AbstractController
         return new Response($themesJson, Response::HTTP_OK, ['content-type' => 'application/json']);
     }
 
-    //#[Route('/api/quizz', name: 'api_getThemesBySlug', methods: ['GET'])]
     public function getBySlug($slug): Response
     {
 
@@ -73,7 +72,6 @@ class ThemeController extends AbstractController
         return new Response($themesJson, Response::HTTP_OK, ['content-type' => 'application/json']);
     }
 
-//  #[Route('/api/themes/{slug}/questions', name: 'api_getThemeBySlugWithQuestions', methods: ['GET'])]
     #[Route('/api/quizz/questions', name: 'api_getThemeBySlugWithQuestions', methods: ['GET'])]
     public function getBySlugWithQuestions(Request $request): Response
     {
@@ -110,7 +108,6 @@ class ThemeController extends AbstractController
         return new Response($themesJson, Response::HTTP_OK, ['content-type' => 'application/json']);
     }
 
-//  #[Route('/api/themes/{slug}/questions/{nb}/aleatoire', name: 'api_getThemeBySlugWithQuestionsRandom', methods: ['GET'])]
     #[Route('/api/quizz/aleatoire', name: 'api_getThemeBySlugWithQuestionsRandom', methods: ['GET'])]
     public function getBySlugWithQuestionsRandom(Request $request): Response
     {
@@ -136,9 +133,9 @@ class ThemeController extends AbstractController
 
         for ($i=1; $i<=$nb; $i++)
         {
-            $position = random_int(0, count($questions)-1);
+            $position = random_int(0, count($questions) - 1);
             while (in_array($position, $historiqueQuestions)) {
-                $position = random_int(0, count($questions)-1);
+                $position = random_int(0, count($questions) - 1);
             }
             $historiqueQuestions[] = $position;
 
